@@ -206,7 +206,7 @@ Five distinct transistor-level designs were implemented and benchmarked:
 
 ## 🚀 Future Work
 
-- Scale to 16-bit and 32-bit designs  
+- Scale to 16-bit and 32-bit designs 
 - Post-layout parasitic extraction (PEX)  
 - Implementation in advanced nodes (65 nm / 45 nm)  
 - ALU datapath integration  
