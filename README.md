@@ -72,41 +72,41 @@ Logic Styles Implemented
 
 Five distinct transistor-level designs were implemented and benchmarked:
 
-1. Static CMOS
+##1. Static CMOS
 
-✅ Full rail-to-rail voltage swing
-✅ High noise immunity and robustness
-❌ High propagation delay (~1.8 ns worst case)
-❌ Severe glitching (>2 ns) due to multi-path race conditions
+-✅ Full rail-to-rail voltage swing-
+-✅ High noise immunity and robustness
+-❌ High propagation delay (~1.8 ns worst case)
+-❌ Severe glitching (>2 ns) due to multi-path race conditions
 
-2. Transmission Gate (TG + Inverter)
+##2. Transmission Gate (TG + Inverter)
 
-✅ Eliminates V<sub>th</sub> loss via complementary NMOS+PMOS pair
-✅ Full voltage swing
-⚠️ Moderate delay (~1.3–2 ns)
-❌ Sensitive to control signal skew
+-✅ Eliminates V<sub>th</sub> loss via complementary NMOS+PMOS pair
+-✅ Full voltage swing
+-⚠️ Moderate delay (~1.3–2 ns)
+-❌ Sensitive to control signal skew
 
-3. PTL with Level Restorer (PTL + LR)
+##3. PTL with Level Restorer (PTL + LR)
 
-✅ Lowest power (~28 µW)
-✅ Fastest switching (~300–700 ps)
-⚠️ Requires PMOS level restorer for full swing
-❌ Reduced drive strength
+-✅ Lowest power (~28 µW)-
+-✅ Fastest switching (~300–700 ps)
+-⚠️ Requires PMOS level restorer for full swing
+-❌ Reduced drive strength
 
-4. Initial Hybrid (PTL → TG → CMOS)
+##4. Initial Hybrid (PTL → TG → CMOS)
 
-✅ Best-case delay: ~234 ps
-❌ Worst-case delay: ~6.4 ns (severe inter-stage impedance mismatch)
-❌ Unpredictable timing behavior
+-✅ Best-case delay: ~234 ps
+-❌ Worst-case delay: ~6.4 ns (severe inter-stage impedance mismatch)
+-❌ Unpredictable timing behavior
 
-5. ✅ Proposed Optimized Hybrid (Final Design)
-StageImplementationRoleStage 1PTL + Level RestorerFast initial switchingStage 2TG + Buffered control signalsSignal stabilization & full swing restorationStage 3Static CMOSStrong output drive, rail-to-rail
-Key optimizations applied:
+##5. ✅ Proposed Optimized Hybrid (Final Design)
+-StageImplementationRoleStage 1PTL + Level RestorerFast initial switchingStage 2TG + Buffered control signalsSignal stabilization & full swing restorationStage 3Static CMOSStrong output drive, rail-to-rail
+-Key optimizations applied:
 
-Buffered select signals (S0, S1, S2) to eliminate control-path skew
-Matched inter-stage impedance to prevent delay spikes
-Balanced fanout loading across all three stages
-Reduced parasitic capacitance at internal nodes
+-Buffered select signals (S0, S1, S2) to eliminate control-path skew
+-Matched inter-stage impedance to prevent delay spikes
+-Balanced fanout loading across all three stages
+-Reduced parasitic capacitance at internal nodes
 
 
 Simulation Results
@@ -133,13 +133,13 @@ DesignOutput SwingStatic CMOSFullTG + InverterFullPTL + LRDegraded (V<sub>th</su
 
 Key Achievements
 ┌──────────────────────────────────────────────────────┐
-│                 OPTIMIZED HYBRID RESULTS              │
+│                 OPTIMIZED HYBRID RESULTS             |
 ├──────────────────────────────────────────────────────┤
-│  ⚡ Worst-case delay    ~570 ps   (~11× improvement)  │
-│  🔋 Power consumption   ~0.71 mW  (~58% reduction)   │
-│  📉 Peak glitch width   <600 ps   (~75% reduction)   │
-│  🔒 Output voltage      Full rail-to-rail swing       │
-│  🏗️  Signal integrity   Excellent — no Vth loss       │
+│  ⚡ Worst-case delay    ~570 ps   (~11× improvement) |
+│  🔋 Power consumption   ~0.71 mW  (~58% reduction)   |
+│  📉 Peak glitch width   <600 ps   (~75% reduction)   |
+|│  🔒 Output voltage      Full rail-to-rail swing     │
+│  🏗️  Signal integrity   Excellent — no Vth loss      │
 └──────────────────────────────────────────────────────┘
 
 Circuit Diagrams
