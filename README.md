@@ -6,52 +6,72 @@ A high-performance, low-power 8-bit ring-based barrel shifter designed in 0.12 �
 📋 Table of Contents
 
 Overview
+
 Architecture
+
 Logic Styles Implemented
+
 Simulation Results
+
 Key Achievements
+
 Circuit Diagrams
+
 Technology Specs
+
 Future Work
-References
-Citation
+
 
 
 Overview
+
 This project presents the design and comprehensive comparative analysis of an 8-bit ring-based barrel shifter implemented using multiple CMOS logic styles. The work evaluates four foundational topologies and proposes an optimized 3-stage hybrid architecture that achieves the best speed–power–robustness trade-off among all designs.
+
 Simulation Environment: Transient SPICE simulations
+
 Technology Node: 0.12 µm CMOS
+
 Supply Voltage: V<sub>DD</sub> = 1.2 V
+
 Metrics Evaluated: Propagation delay · Glitch magnitude · Voltage integrity · Power consumption
 
 Architecture
+
 The 8-bit shifter uses a logarithmic 3-stage structure, enabling O(log N) propagation depth:
+
 Input D[7:0]
      │
      ▼
+     
 ┌─────────────┐     S0
 │   Stage 1   │◄────────   Shift by 1 bit
 │  (PTL + LR) │
 └──────┬──────┘
        │
        ▼
+       
 ┌─────────────┐     S1
 │   Stage 2   │◄────────   Shift by 2 bits
 │  (TG + Buf) │
 └──────┬──────┘
        │
        ▼
+       
 ┌─────────────┐     S2
 │   Stage 3   │◄────────   Shift by 4 bits
 │ (Stat CMOS) │
 └──────┬──────┘
        │
        ▼
+       
 Output Q[7:0]  (ring-rotated)
+
 The ring (circular) configuration routes bits shifted out of MSB back to LSB, enabling both left-rotate and right-rotate operations via select-signal inversion.
 
 Logic Styles Implemented
+
 Five distinct transistor-level designs were implemented and benchmarked:
+
 1. Static CMOS
 
 ✅ Full rail-to-rail voltage swing
