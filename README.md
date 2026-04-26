@@ -33,28 +33,13 @@ This project presents the design and comprehensive comparative analysis of an **
 
 The 8-bit shifter uses a **logarithmic 3-stage structure**, enabling **O(log N)** propagation depth:
 
- Input D[7:0]
-│
-▼
-┌─────────────┐ S0
-│ Stage 1 │◄──────── Shift by 1 bit
-│ (PTL + LR) │
-└──────┬──────┘
-│
-▼
-┌─────────────┐ S1
-│ Stage 2 │◄──────── Shift by 2 bits
-│ (TG + Buf) │
-└──────┬──────┘
-│
-▼
-┌─────────────┐ S2
-│ Stage 3 │◄──────── Shift by 4 bits
-│ (Stat CMOS) │
-└──────┬──────┘
-│
-▼
-Output Q[7:0] (ring-rotated)
+Input → Stage 1 (Shift ×1) → Stage 2 (Shift ×2) → Stage 3 (Shift ×4) → Output
+
+| Stage | Operation | Logic |
+|------|----------|------|
+| Stage 1 | Shift by 1 | PTL + Level Restorer |
+| Stage 2 | Shift by 2 | Transmission Gate + Buffer |
+| Stage 3 | Shift by 4 | Static CMOS |
 
 
 The **ring (circular)** configuration routes bits shifted out of MSB back to LSB, enabling both left-rotate and right-rotate operations via select-signal inversion.
@@ -176,16 +161,16 @@ Five distinct transistor-level designs were implemented and benchmarked:
 ---
 
 ## 🏆 Key Achievements
-┌──────────────────────────────────────────────┐
-│ OPTIMIZED HYBRID RESULTS │
-├──────────────────────────────────────────────┤
-│ ⚡ Worst-case delay ~570 ps (~11× faster) │
-│ 🔋 Power consumption ~0.71 mW (~58% lower) │
-│ 📉 Glitch width <600 ps │
-│ 🔒 Full voltage swing achieved │
-│ 🏗️ Strong signal integrity │
-└──────────────────────────────────────────────┘
 
+## 🏆 Optimized Hybrid Results
+
+| Metric | Result |
+|--------|--------|
+| ⚡ Worst-case delay | ~570 ps (~11× faster) |
+| 🔋 Power consumption | ~0.71 mW (~58% lower) |
+| 📉 Glitch width | <600 ps |
+| 🔒 Voltage swing | Full rail-to-rail |
+| 🏗️ Signal integrity | Strong (no V<sub>th</sub> loss) |
 ---
 
 ## 📂 Circuit Diagrams
