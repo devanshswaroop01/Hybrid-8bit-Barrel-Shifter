@@ -1,75 +1,67 @@
-🔄 8-Bit Hybrid Ring Barrel Shifter
+# 🔄 8-Bit Hybrid Ring Barrel Shifter
 
-A high-performance, low-power 8-bit ring-based barrel shifter designed in 0.12 µm CMOS, evaluated across five logic topologies — culminating in an optimized hybrid architecture with ~11× worst-case delay improvement.
-
-
-📋 Table of Contents
-
-Overview
-
-Architecture
-
-Logic Styles Implemented
-
-Simulation Results
-
-Key Achievements
-
-Circuit Diagrams
-
-Technology Specs
-
-Future Work
-
-
-
-Overview
-
-This project presents the design and comprehensive comparative analysis of an 8-bit ring-based barrel shifter implemented using multiple CMOS logic styles. The work evaluates four foundational topologies and proposes an optimized 3-stage hybrid architecture that achieves the best speed–power–robustness trade-off among all designs.
-
-Simulation Environment: Transient SPICE simulations
-
-Technology Node: 0.12 µm CMOS
-
-Supply Voltage: V<sub>DD</sub> = 1.2 V
-
-Metrics Evaluated: Propagation delay · Glitch magnitude · Voltage integrity · Power consumption
-
-Architecture
-
-The 8-bit shifter uses a logarithmic 3-stage structure, enabling O(log N) propagation depth:
-
-Input D[7:0]
-     │
-     ▼
-     
-┌─────────────┐     S0
-│   Stage 1   │◄────────   Shift by 1 bit
-│  (PTL + LR) │
-└──────┬──────┘
-       │
-       ▼
-       
-┌─────────────┐     S1
-│   Stage 2   │◄────────   Shift by 2 bits
-│  (TG + Buf) │
-└──────┬──────┘
-       │
-       ▼
-       
-┌─────────────┐     S2
-│   Stage 3   │◄────────   Shift by 4 bits
-│ (Stat CMOS) │
-└──────┬──────┘
-       │
-       ▼
-       
-Output Q[7:0]  (ring-rotated)
-The ring (circular) configuration routes bits shifted out of MSB back to LSB, enabling both left-rotate and right-rotate operations via select-signal inversion.
+> **A high-performance, low-power 8-bit ring-based barrel shifter designed in 0.12 µm CMOS, evaluated across five logic topologies — culminating in an optimized hybrid architecture with ~11× worst-case delay improvement.**
 
 ---
 
-## Logic Styles Implemented
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Logic Styles Implemented](#logic-styles-implemented)
+- [Simulation Results](#simulation-results)
+- [Key Achievements](#key-achievements)
+- [Circuit Diagrams](#circuit-diagrams)
+- [Technology Specs](#technology-specs)
+- [Future Work](#future-work)
+- [References](#references)
+
+---
+
+## 🧠 Overview
+
+This project presents the design and comprehensive comparative analysis of an **8-bit ring-based barrel shifter** implemented using multiple CMOS logic styles. The work evaluates four foundational topologies and proposes an **optimized 3-stage hybrid architecture** that achieves the best speed–power–robustness trade-off among all designs.
+
+**Simulation Environment:** Transient SPICE simulations  
+**Technology Node:** 0.12 µm CMOS  
+**Supply Voltage:** V<sub>DD</sub> = 1.2 V  
+**Metrics Evaluated:** Propagation delay · Glitch magnitude · Voltage integrity · Power consumption  
+
+---
+
+## 🏗️ Architecture
+
+The 8-bit shifter uses a **logarithmic 3-stage structure**, enabling **O(log N)** propagation depth:
+
+ Input D[7:0]
+│
+▼
+┌─────────────┐ S0
+│ Stage 1 │◄──────── Shift by 1 bit
+│ (PTL + LR) │
+└──────┬──────┘
+│
+▼
+┌─────────────┐ S1
+│ Stage 2 │◄──────── Shift by 2 bits
+│ (TG + Buf) │
+└──────┬──────┘
+│
+▼
+┌─────────────┐ S2
+│ Stage 3 │◄──────── Shift by 4 bits
+│ (Stat CMOS) │
+└──────┬──────┘
+│
+▼
+Output Q[7:0] (ring-rotated)
+
+
+The **ring (circular)** configuration routes bits shifted out of MSB back to LSB, enabling both left-rotate and right-rotate operations via select-signal inversion.
+
+---
+
+## ⚙️ Logic Styles Implemented
 
 Five distinct transistor-level designs were implemented and benchmarked:
 
@@ -112,11 +104,11 @@ Five distinct transistor-level designs were implemented and benchmarked:
 
 ### 5. ✅ Proposed Optimized Hybrid (Final Design)
 
-| Stage | Implementation | Role |
-|------|--------------|------|
-| Stage 1 | PTL + Level Restorer | Fast initial switching |
-| Stage 2 | TG + Buffered control signals | Signal stabilization & full swing restoration |
-| Stage 3 | Static CMOS | Strong output drive, rail-to-rail |
+| Stage   | Implementation                  | Role                                   |
+|--------|--------------------------------|----------------------------------------|
+| Stage 1 | PTL + Level Restorer          | Fast initial switching                 |
+| Stage 2 | TG + Buffered control signals | Signal stabilization & full swing      |
+| Stage 3 | Static CMOS                   | Strong output drive, rail-to-rail      |
 
 **Key optimizations applied:**
 
@@ -127,7 +119,7 @@ Five distinct transistor-level designs were implemented and benchmarked:
 
 ---
 
-## Simulation Results
+## 📊 Simulation Results
 
 ### ⚡ Propagation Delay
 
@@ -167,7 +159,7 @@ Five distinct transistor-level designs were implemented and benchmarked:
 | Initial Hybrid | ~1.69 mW |
 | **Optimized Hybrid** | **~0.71 mW** ✅ |
 
-✔ ~58% power reduction from initial hybrid (1.69 mW → 0.71 mW)  
+✔ ~58% power reduction from initial hybrid  
 
 ---
 
@@ -181,55 +173,59 @@ Five distinct transistor-level designs were implemented and benchmarked:
 | Initial Hybrid | Restored (partial) |
 | **Optimized Hybrid** | **Full (Strong)** ✅ |
 
-Key Achievements
-┌──────────────────────────────────────────────────────┐
-│                 OPTIMIZED HYBRID RESULTS             |
-├──────────────────────────────────────────────────────┤
-│  ⚡ Worst-case delay    ~570 ps   (~11× improvement) |
-│  🔋 Power consumption   ~0.71 mW  (~58% reduction)   |
-│  📉 Peak glitch width   <600 ps   (~75% reduction)   |
-|│  🔒 Output voltage      Full rail-to-rail swing     │
-│  🏗️  Signal integrity   Excellent — no Vth loss      │
-└──────────────────────────────────────────────────────┘
+---
 
-Circuit Diagrams
-The repository includes SPICE netlists and simulation waveforms for all five implementations:
+## 🏆 Key Achievements
+┌──────────────────────────────────────────────┐
+│ OPTIMIZED HYBRID RESULTS │
+├──────────────────────────────────────────────┤
+│ ⚡ Worst-case delay ~570 ps (~11× faster) │
+│ 🔋 Power consumption ~0.71 mW (~58% lower) │
+│ 📉 Glitch width <600 ps │
+│ 🔒 Full voltage swing achieved │
+│ 🏗️ Strong signal integrity │
+└──────────────────────────────────────────────┘
+
+---
+
+## 📂 Circuit Diagrams
+
 📁 circuits/
 ├── 01_static_cmos/
-│   ├── barrel_cmos.sp
-│   └── waveforms/
 ├── 02_transmission_gate/
-│   ├── barrel_tg.sp
-│   └── waveforms/
 ├── 03_ptl_level_restorer/
-│   ├── barrel_ptl_lr.sp
-│   └── waveforms/
 ├── 04_initial_hybrid/
-│   ├── barrel_hybrid_initial.sp
-│   └── waveforms/
-└── 05_optimized_hybrid/         ← Final Design
-    ├── barrel_hybrid_opt.sp
-    ├── barrel_hybrid_opt_buffered.sp
-    └── waveforms/
-Circuit variants included:
-
-Stage 1 (PTL + Level Restorer), Stage 2 (TG + Inv), Stage 3 (Static CMOS) — base hybrid
-+ Buffered Select Signal — final optimized version
+└── 05_optimized_hybrid/
 
 
-Technology Specs
-ParameterValueTechnology0.12 µm CMOSSupply Voltage (V<sub>DD</sub>)1.2 VArchitecture3-stage logarithmic ringData width8 bitsShift stages×1, ×2, ×4SimulatorSPICE (transient analysis)Measurement ref.50% V<sub>DD</sub> crossing
+---
 
-Future Work
+## ⚙️ Technology Specs
 
- Scale to 16-bit and 32-bit barrel shifter variants
- Post-layout PEX validation — parasitic extraction from physical layout
- Port to advanced nodes (65 nm / 45 nm FinFET)
- ALU datapath integration with carry-lookahead adder and multiplier
- Power optimization via multi-V<sub>t</sub> transistor assignment and clock gating
+| Parameter | Value |
+|----------|------|
+| Technology | 0.12 µm CMOS |
+| VDD | 1.2 V |
+| Architecture | 3-stage logarithmic |
+| Data width | 8-bit |
+| Shift stages | ×1, ×2, ×4 |
+| Simulator | SPICE |
+| Measurement | 50% V<sub>DD</sub> crossing |
 
+---
 
-References
+## 🚀 Future Work
+
+ -Scale to 16-bit and 32-bit barrel shifter variants
+ -Post-layout PEX validation — parasitic extraction from physical layout
+ -Port to advanced nodes (65 nm / 45 nm FinFET)
+ -ALU datapath integration with carry-lookahead adder and multiplier
+ -Power optimization via multi-V<sub>t</sub> transistor assignment and clock gating
+
+---
+
+## 📚 References
+
 [1] N. H. E. Weste and D. Harris, CMOS VLSI Design: A Circuits and Systems Perspective, 4th ed. Pearson, 2011.
 [2] J. M. Rabaey, A. Chandrakasan, and B. Nikolić, Digital Integrated Circuits: A Design Perspective, 2nd ed. Prentice Hall, 2003.
 [3] S. Kang and Y. Leblebici, CMOS Digital Integrated Circuits: Analysis and Design. McGraw-Hill, 2002.
