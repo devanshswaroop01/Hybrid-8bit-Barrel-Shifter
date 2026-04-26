@@ -216,18 +216,18 @@ Five distinct transistor-level designs were implemented and benchmarked:
 
 ## 🚀 Future Work
 
- -Scale to 16-bit and 32-bit barrel shifter variants
- -Post-layout PEX validation — parasitic extraction from physical layout
- -Port to advanced nodes (65 nm / 45 nm FinFET)
- -ALU datapath integration with carry-lookahead adder and multiplier
- -Power optimization via multi-V<sub>t</sub> transistor assignment and clock gating
+- Scale to 16-bit and 32-bit designs  
+- Post-layout parasitic extraction (PEX)  
+- Implementation in advanced nodes (65 nm / 45 nm)  
+- ALU datapath integration  
+- Multi-V<sub>t</sub> power optimization  
 
 ---
 
 ## 📚 References
 
-[1] N. H. E. Weste and D. Harris, CMOS VLSI Design: A Circuits and Systems Perspective, 4th ed. Pearson, 2011.
-[2] J. M. Rabaey, A. Chandrakasan, and B. Nikolić, Digital Integrated Circuits: A Design Perspective, 2nd ed. Prentice Hall, 2003.
-[3] S. Kang and Y. Leblebici, CMOS Digital Integrated Circuits: Analysis and Design. McGraw-Hill, 2002.
-[4] K. Roy, S. Mukhopadhyay, and H. Mahmoodi-Meimand, "Leakage current mechanisms and leakage reduction techniques in deep-submicrometer CMOS circuits," Proc. IEEE, vol. 91, no. 2, pp. 305–327, Feb. 2003.
-[5] A. P. Chandrakasan and R. W. Brodersen, Low Power Digital CMOS Design. Springer, 1995.
+[1] Weste & Harris – CMOS VLSI Design  
+[2] Rabaey – Digital IC Design  
+[3] Kang & Leblebici – CMOS Circuits  
+[4] Roy et al. – Leakage Reduction  
+[5] Chandrakasan – Low Power CMOS  
