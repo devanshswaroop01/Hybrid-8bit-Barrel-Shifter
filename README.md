@@ -176,10 +176,15 @@ Five distinct transistor-level designs were implemented and benchmarked:
 ## 📂 Circuit Diagrams
 
 📁 circuits/
+
 ├── 01_static_cmos/
+
 ├── 02_transmission_gate/
+
 ├── 03_ptl_level_restorer/
+
 ├── 04_initial_hybrid/
+
 └── 05_optimized_hybrid/
 
 
