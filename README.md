@@ -72,12 +72,12 @@ Logic Styles Implemented
 
 Five distinct transistor-level designs were implemented and benchmarked:
 
-##1. Static CMOS
+1. Static CMOS
 
--✅ Full rail-to-rail voltage swing-
--✅ High noise immunity and robustness
--❌ High propagation delay (~1.8 ns worst case)
--❌ Severe glitching (>2 ns) due to multi-path race conditions
+✅ Full rail-to-rail voltage swing-
+✅ High noise immunity and robustness
+❌ High propagation delay (~1.8 ns worst case)
+❌ Severe glitching (>2 ns) due to multi-path race conditions
 
 ##2. Transmission Gate (TG + Inverter)
 
@@ -86,12 +86,12 @@ Five distinct transistor-level designs were implemented and benchmarked:
 -⚠️ Moderate delay (~1.3–2 ns)
 -❌ Sensitive to control signal skew
 
-##3. PTL with Level Restorer (PTL + LR)
+### 3. PTL with Level Restorer (PTL + LR)
 
--✅ Lowest power (~28 µW)-
--✅ Fastest switching (~300–700 ps)
--⚠️ Requires PMOS level restorer for full swing
--❌ Reduced drive strength
+- ✅ Lowest power (~28 µW)
+- ✅ Fastest switching (~300–700 ps)
+- ⚠️ Requires PMOS level restorer for full swing
+- ❌ Reduced drive strength
 
 ##4. Initial Hybrid (PTL → TG → CMOS)
 
