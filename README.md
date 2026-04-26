@@ -65,71 +65,121 @@ Input D[7:0]
        ▼
        
 Output Q[7:0]  (ring-rotated)
-
 The ring (circular) configuration routes bits shifted out of MSB back to LSB, enabling both left-rotate and right-rotate operations via select-signal inversion.
 
-Logic Styles Implemented
+---
+
+## Logic Styles Implemented
 
 Five distinct transistor-level designs were implemented and benchmarked:
 
-###1. Static CMOS
+---
 
--✅ Full rail-to-rail voltage swing-
--✅ High noise immunity and robustness
--❌ High propagation delay (~1.8 ns worst case)
--❌ Severe glitching (>2 ns) due to multi-path race conditions
+### 1. Static CMOS
 
-###2. Transmission Gate (TG + Inverter)
+- ✅ Full rail-to-rail voltage swing  
+- ✅ High noise immunity and robustness  
+- ❌ High propagation delay (~1.8 ns worst case)  
+- ❌ Severe glitching (>2 ns) due to multi-path race conditions  
 
--✅ Eliminates V<sub>th</sub> loss via complementary NMOS+PMOS pair
--✅ Full voltage swing
--⚠️ Moderate delay (~1.3–2 ns)
--❌ Sensitive to control signal skew
+---
+
+### 2. Transmission Gate (TG + Inverter)
+
+- ✅ Eliminates V<sub>th</sub> loss via complementary NMOS + PMOS pair  
+- ✅ Full voltage swing  
+- ⚠️ Moderate delay (~1.3–2 ns)  
+- ❌ Sensitive to control signal skew  
+
+---
 
 ### 3. PTL with Level Restorer (PTL + LR)
 
-- ✅ Lowest power (~28 µW)
-- ✅ Fastest switching (~300–700 ps)
-- ⚠️ Requires PMOS level restorer for full swing
-- ❌ Reduced drive strength
+- ✅ Lowest power (~28 µW)  
+- ✅ Fastest switching (~300–700 ps)  
+- ⚠️ Requires PMOS level restorer for full swing  
+- ❌ Reduced drive strength  
 
-###4. Initial Hybrid (PTL → TG → CMOS)
+---
 
--✅ Best-case delay: ~234 ps
--❌ Worst-case delay: ~6.4 ns (severe inter-stage impedance mismatch)
--❌ Unpredictable timing behavior
+### 4. Initial Hybrid (PTL → TG → CMOS)
 
-###5. ✅ Proposed Optimized Hybrid (Final Design)
--StageImplementationRoleStage 1PTL + Level RestorerFast initial switchingStage 2TG + Buffered control signalsSignal stabilization & full swing restorationStage 3Static CMOSStrong output drive, rail-to-rail
--Key optimizations applied:
+- ✅ Best-case delay: ~234 ps  
+- ❌ Worst-case delay: ~6.4 ns (severe inter-stage impedance mismatch)  
+- ❌ Unpredictable timing behavior  
 
--Buffered select signals (S0, S1, S2) to eliminate control-path skew
--Matched inter-stage impedance to prevent delay spikes
--Balanced fanout loading across all three stages
--Reduced parasitic capacitance at internal nodes
+---
 
+### 5. ✅ Proposed Optimized Hybrid (Final Design)
 
-Simulation Results
-Propagation Delay
-DesignBest CaseWorst CaseStatic CMOS~600 ps~1.8 nsTG + Inverter~500 ps~1.3–2 nsPTL + LR~300 ps~700 psInitial Hybrid~234 ps~6.4 ns ❌Optimized Hybrid~150 ps~570 ps ✅
+| Stage | Implementation | Role |
+|------|--------------|------|
+| Stage 1 | PTL + Level Restorer | Fast initial switching |
+| Stage 2 | TG + Buffered control signals | Signal stabilization & full swing restoration |
+| Stage 3 | Static CMOS | Strong output drive, rail-to-rail |
 
-✔ ~11× worst-case delay improvement over initial hybrid
+**Key optimizations applied:**
 
+- Buffered select signals (S0, S1, S2) to eliminate control-path skew  
+- Matched inter-stage impedance to prevent delay spikes  
+- Balanced fanout loading across all three stages  
+- Reduced parasitic capacitance at internal nodes  
 
-Glitch Analysis
-DesignMax Glitch WidthStatic CMOS>2 nsTG + Inverter>2 nsPTL + LR~400 psInitial Hybrid~800 psOptimized Hybrid<600 ps ✅
+---
 
-✔ ~70–80% glitch reduction compared to CMOS/TG designs
+## Simulation Results
 
+### ⚡ Propagation Delay
 
-Power Consumption
-DesignPowerStatic CMOS~1.6–1.7 mWTG + Inverter~0.7–0.8 mWPTL + LR~28 µWInitial Hybrid~1.69 mWOptimized Hybrid~0.71 mW ✅
+| Design | Best Case | Worst Case |
+|--------|----------|-----------|
+| Static CMOS | ~600 ps | ~1.8 ns |
+| TG + Inverter | ~500 ps | ~1.3–2 ns |
+| PTL + LR | ~300 ps | ~700 ps |
+| Initial Hybrid | ~234 ps | ~6.4 ns ❌ |
+| **Optimized Hybrid** | **~150 ps** | **~570 ps** ✅ |
 
-✔ ~58% power reduction from initial hybrid (1.69 mW → 0.71 mW)
+✔ ~11× worst-case delay improvement over initial hybrid  
 
+---
 
-Voltage Integrity
-DesignOutput SwingStatic CMOSFullTG + InverterFullPTL + LRDegraded (V<sub>th</sub> loss)Initial HybridRestored (partial)Optimized HybridFull (Strong) ✅
+### 📉 Glitch Analysis
+
+| Design | Max Glitch Width |
+|--------|------------------|
+| Static CMOS | >2 ns |
+| TG + Inverter | >2 ns |
+| PTL + LR | ~400 ps |
+| Initial Hybrid | ~800 ps |
+| **Optimized Hybrid** | **<600 ps** ✅ |
+
+✔ ~70–80% glitch reduction compared to CMOS/TG designs  
+
+---
+
+### 🔋 Power Consumption
+
+| Design | Power |
+|--------|------|
+| Static CMOS | ~1.6–1.7 mW |
+| TG + Inverter | ~0.7–0.8 mW |
+| PTL + LR | ~28 µW |
+| Initial Hybrid | ~1.69 mW |
+| **Optimized Hybrid** | **~0.71 mW** ✅ |
+
+✔ ~58% power reduction from initial hybrid (1.69 mW → 0.71 mW)  
+
+---
+
+### 🔒 Voltage Integrity
+
+| Design | Output Swing |
+|--------|-------------|
+| Static CMOS | Full |
+| TG + Inverter | Full |
+| PTL + LR | Degraded (V<sub>th</sub> loss) |
+| Initial Hybrid | Restored (partial) |
+| **Optimized Hybrid** | **Full (Strong)** ✅ |
 
 Key Achievements
 ┌──────────────────────────────────────────────────────┐
