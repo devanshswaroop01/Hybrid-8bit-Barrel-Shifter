@@ -1,6 +1,6 @@
 # 🔄 8-Bit Hybrid Ring Barrel Shifter
 
-> **A high-performance, low-power 8-bit ring-based barrel shifter designed in 0.12 µm CMOS, evaluated across five logic topologies — culminating in an optimized hybrid architecture with ~11× worst-case delay improvement.**
+> **A high-performance, low-power 8-bit ring-based barrel shifter designed in 0.18 µm CMOS, evaluated across five logic topologies — culminating in an optimized hybrid architecture with ~11× worst-case delay improvement.**
 
 ---
 
@@ -23,7 +23,7 @@
 This project presents the design and comprehensive comparative analysis of an **8-bit ring-based barrel shifter** implemented using multiple CMOS logic styles. The work evaluates four foundational topologies and proposes an **optimized 3-stage hybrid architecture** that achieves the best speed–power–robustness trade-off among all designs.
 
 **Simulation Environment:** Transient SPICE simulations  
-**Technology Node:** 0.12 µm CMOS  
+**Technology Node:** 0.18 µm CMOS  
 **Supply Voltage:** V<sub>DD</sub> = 1.2 V  
 **Metrics Evaluated:** Propagation delay · Glitch magnitude · Voltage integrity · Power consumption  
 
@@ -194,7 +194,7 @@ Five distinct transistor-level designs were implemented and benchmarked:
 
 | Parameter | Value |
 |----------|------|
-| Technology | 0.12 µm CMOS |
+| Technology | 0.18 µm CMOS |
 | VDD | 1.2 V |
 | Architecture | 3-stage logarithmic |
 | Data width | 8-bit |
